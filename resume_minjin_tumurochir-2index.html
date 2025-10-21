@@ -5,229 +5,96 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Resume — Minjin Tumurochir</title>
   <style>
-    :root {
-      --accent: #0f766e;
-      --muted: #6b7280;
-      --bg: #f8fafc;
-      --card: #ffffff;
+    :root{
+      --accent:#0f766e;
+      --muted:#6b7280;
+      --bg:#f8fafc;
+      --card:#ffffff;
+    }
+    *{box-sizing:border-box}
+    body{
+      font-family:Inter,ui-sans-serif,system-ui,Segoe UI,Roboto,"Helvetica Neue",Arial;
+      line-height:1.45;color:#0f172a;background:var(--bg);padding:28px;
     }
 
-    * {
-      box-sizing: border-box;
+    /* make the resume the positioning context so the ID stays inside the page */
+    .resume{
+      max-width:900px;margin:0 auto;background:var(--card);border-radius:12px;overflow:hidden;
+      box-shadow:0 8px 30px rgba(2,6,23,0.08);
+      position:relative; /* <-- important */
     }
 
-    body {
-      font-family: Inter, ui-sans-serif, system-ui, Segoe UI, Roboto, "Helvetica Neue", Arial;
-      line-height: 1.45;
-      color: #0f172a;
-      background: var(--bg);
-      padding: 28px;
-      position: relative;
+    /* Student ID inside the resume card (will not appear off-page) */
+    .student-id{
+      position:absolute;
+      top:14px;
+      left:14px;
+      font-size:14px;
+      font-weight:600;
+      color:var(--accent);
+      background:rgba(255,255,255,0.85);
+      padding:6px 12px;
+      border-radius:6px;
+      box-shadow:0 2px 6px rgba(0,0,0,0.08);
+      z-index:20;
     }
 
-    /* ✅ Fixed Student ID box */
-    .student-id {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      font-size: 14px;
-      font-weight: 600;
-      color: #0f766e;
-      background: #ffffffb0;
-      padding: 6px 12px;
-      border-radius: 6px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-      z-index: 10;
-    }
-
-    .resume {
-      max-width: 900px;
-      margin: 0 auto;
-      background: var(--card);
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 8px 30px rgba(2, 6, 23, 0.08);
-    }
-
-    header {
-      display: flex;
-      gap: 20px;
-      padding: 28px;
-      border-bottom: 1px solid #eef2f7;
-      background: linear-gradient(180deg, rgba(15, 118, 110, 0.03), transparent);
-    }
-
-    .avatar {
-      flex: 0 0 110px;
-    }
-
-    .avatar img {
-      width: 110px;
-      height: 110px;
-      object-fit: cover;
-      border-radius: 14px;
-      border: 3px solid #fff;
-      box-shadow: 0 6px 18px rgba(2, 6, 23, 0.06);
-    }
-
-    .head-info {
-      flex: 1;
-    }
-
-    h1 {
-      margin: 0;
-      font-size: 22px;
-      letter-spacing: -0.2px;
-    }
-
-    .title {
-      color: var(--accent);
-      font-weight: 600;
-      margin-top: 6px;
-    }
-
-    .contact {
-      margin-top: 10px;
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    .contact a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .container {
-      display: grid;
-      grid-template-columns: 1fr 320px;
-      gap: 28px;
-      padding: 28px;
-    }
-
-    main {
-      min-width: 0;
-    }
-
-    section {
-      margin-bottom: 18px;
-    }
-
-    h2 {
-      font-size: 14px;
-      margin: 0 0 10px 0;
-      color: #0b1220;
-    }
-
-    .summary {
-      background: #f8fafc;
-      padding: 14px;
-      border-radius: 8px;
-      color: #263243;
-    }
-
-    .card {
-      background: #fff;
-      padding: 16px;
-      border-radius: 10px;
-      border: 1px solid #eef2f7;
-    }
-
-    .job {
-      display: flex;
-      justify-content: space-between;
-      gap: 12px;
-    }
-
-    .job .left {
-      flex: 1;
-    }
-
-    .meta {
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    ul {
-      margin: 8px 0 0 16px;
-    }
-
-    .skill-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .skill {
-      background: #f1f5f9;
-      padding: 6px 10px;
-      border-radius: 999px;
-      font-size: 13px;
-      color: #0f172a;
-    }
-
-    .small {
-      font-size: 13px;
-      color: var(--muted);
-    }
-
-    footer {
-      padding: 18px 28px;
-      border-top: 1px solid #eef2f7;
-      background: #fbfeff;
-      text-align: center;
-      color: var(--muted);
-      font-size: 13px;
-    }
+    header{display:flex;gap:20px;padding:28px;padding-top:48px;border-bottom:1px solid #eef2f7;background:linear-gradient(180deg,rgba(15,118,110,0.03),transparent)}
+    .avatar{flex:0 0 110px}
+    /* fixed photo frame: consistent width/height + object-fit cover to avoid stretching */
+    .avatar img{width:110px;height:110px;object-fit:cover;border-radius:14px;border:3px solid #fff;box-shadow:0 6px 18px rgba(2,6,23,0.06);display:block}
+    .head-info{flex:1}
+    h1{margin:0;font-size:22px;letter-spacing:-0.2px}
+    .title{color:var(--accent);font-weight:600;margin-top:6px}
+    .contact{margin-top:10px;color:var(--muted);font-size:14px}
+    .contact a{color:inherit;text-decoration:none}
+    .container{display:grid;grid-template-columns:1fr 320px;gap:28px;padding:28px}
+    main{min-width:0}
+    section{margin-bottom:18px}
+    h2{font-size:14px;margin:0 0 10px 0;color:#0b1220}
+    .summary{background:#f8fafc;padding:14px;border-radius:8px;color:#263243}
+    .card{background:#fff;padding:16px;border-radius:10px;border:1px solid #eef2f7}
+    .job{display:flex;justify-content:space-between;gap:12px}
+    .job .left{flex:1}
+    .meta{color:var(--muted);font-size:13px}
+    ul{margin:8px 0 0 16px}
+    .skill-list{display:flex;flex-wrap:wrap;gap:8px}
+    .skill{background:#f1f5f9;padding:6px 10px;border-radius:999px;font-size:13px;color:#0f172a}
+    .small{font-size:13px;color:var(--muted)}
+    footer{padding:18px 28px;border-top:1px solid #eef2f7;background:#fbfeff;text-align:center;color:var(--muted);font-size:13px}
 
     /* Print-friendly */
-    @media print {
-      body {
-        padding: 0;
-        background: #fff;
-      }
-
-      .resume {
-        box-shadow: none;
-        border-radius: 0;
-      }
-
-      .container {
-        grid-template-columns: 1fr 300px;
-      }
-
-      .student-id {
-        display: none; /* Hide ID when printing if desired */
-      }
+    @media print{
+      body{padding:0;background:#fff}
+      .resume{box-shadow:none;border-radius:0}
+      .container{grid-template-columns:1fr 300px}
+      .student-id{display:none} /* hide the badge when printing if you want */
     }
 
-    @media (max-width: 880px) {
-      .container {
-        grid-template-columns: 1fr;
-      }
-
-      .avatar img {
-        width: 86px;
-        height: 86px;
-      }
+    @media (max-width:880px){
+      .container{grid-template-columns:1fr}
+      .avatar img{width:86px;height:86px}
+      header{padding-top:36px}
+      .student-id{top:10px;left:10px}
     }
   </style>
 </head>
-
 <body>
-  <div class="student-id">Student ID: 202512345</div>
 
   <div class="resume" role="document">
+    <!-- Move the student-id INSIDE the .resume so it doesn't go off the page -->
+    <div class="student-id">Student ID: 202512345</div>
+
     <header>
       <div class="avatar">
-        <img src="photo.01.jpg" alt="Minjin Tumur-Ochir" style="width:200px;">
+        <!-- removed inline width that caused stretching -->
+        <img src="photo.01.jpg" alt="Minjin Tumur-Ochir">
       </div>
       <div class="head-info">
         <h1>Minjin Tumurochir</h1>
         <div class="title">Aspiring Finance Professional • B.A. Finance (2+2 candidate)</div>
         <div class="contact small">
-          Taichung, Taiwan • +886 xxx xxx xxx •
-          <a href="mailto:minjintumurochir@gmail.com">minjintumurochir@gmail.com</a> •
-          <a href="#">linkedin.com/in/minji</a>
+          Taichung, Taiwan • +886 xxx xxx xxx • <a href="mailto:minjintumurochir@gmail.com">minjintumurochir@gmail.com</a> • <a href="#">linkedin.com/in/minji</a>
         </div>
         <div class="contact small">Portfolio: <a href="#">your-portfolio.example</a></div>
       </div>
@@ -237,12 +104,7 @@
       <main>
         <section class="card">
           <h2>Professional Summary</h2>
-          <p class="summary">
-            Highly motivated finance student with practical experience in regression analysis, financial research, and data-driven projects.
-            Strong quantitative skills (EViews, Excel), effective communicator in multicultural environments, and eager to contribute to financial
-            analysis, risk assessment, and investment research roles. Demonstrated ability to manage academic projects and present clear,
-            actionable insights.
-          </p>
+          <p class="summary">Highly motivated finance student with practical experience in regression analysis, financial research, and data-driven projects. Strong quantitative skills (EViews, Excel), effective communicator in multicultural environments, and eager to contribute to financial analysis, risk assessment, and investment research roles. Demonstrated ability to manage academic projects and present clear, actionable insights.</p>
         </section>
 
         <section class="card">
@@ -266,7 +128,6 @@
 
         <section class="card">
           <h2>Experience & Projects</h2>
-
           <div style="margin-bottom:12px">
             <div class="job">
               <div class="left">
@@ -330,16 +191,13 @@
             <li>Created a study plan and printable checklist for international study prep used by peers.</li>
           </ul>
         </section>
+
       </main>
 
       <aside>
         <section class="card">
           <h2>Contact</h2>
-          <p class="small">
-            Email: <a href="mailto:minjintumurochir@gmail.com">minjintumurochir@gmail.com</a><br>
-            Phone: +886 9X XXX XXXX<br>
-            LinkedIn: <a href="#">linkedin.com/in/minji</a>
-          </p>
+          <p class="small">Email: <a href="mailto:minjintumurochir@gmail.com">minjintumurochir@gmail.com</a><br>Phone: +886 9X XXX XXXX<br>LinkedIn: <a href="#">linkedin.com/in/minji</a></p>
         </section>
 
         <section class="card">
@@ -349,7 +207,7 @@
 
         <section class="card">
           <h2>Languages</h2>
-          <p class="small">Mongolian (native)<br>English (C1 — actively improving)<br>Chinese (basic conversational)</p>
+          <p class="small">Mongolian (native)<br>English (c1 — actively improving)<br>Chinese (basic conversational)</p>
         </section>
 
         <section class="card">
@@ -368,5 +226,6 @@
       Built with care • Ready for export to PDF (File → Print → Save as PDF)
     </footer>
   </div>
+
 </body>
 </html>
